@@ -2,15 +2,15 @@
 /**
  * Configuración del plugin.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
- * Snapshot inmutable de la configuración de SiteVitals.
+ * Snapshot inmutable de la configuración de zer0sh Site Health Monitor.
  *
  * Recoge la frecuencia del escaneo programado, el envío de informes por
  * correo y el destinatario opcional. La construcción valida de forma estricta;

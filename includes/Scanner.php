@@ -2,12 +2,12 @@
 /**
  * Orquestador del escaneo completo del sitio.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Ejecuta los checks locales y las consultas de vulnerabilidades y agrega
@@ -245,7 +245,7 @@ final class Scanner {
 	private function recommendation_for( Vulnerability $vulnerability ): string {
 		$label = sprintf(
 			/* translators: 1: source name (e.g. CVE-2024-12345), 2: severity. */
-			__( 'Vulnerability %1$s with %2$s severity. Update the component to a secure version.', 'sitevitals' ),
+			__( 'Vulnerability %1$s with %2$s severity. Update the component to a secure version.', 'zer0sh-site-health-monitor' ),
 			$vulnerability->get_source_name(),
 			$vulnerability->get_severity()
 		);

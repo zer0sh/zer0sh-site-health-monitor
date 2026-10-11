@@ -1,10 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests\Checks;
+namespace Zer0sh\SiteHealthMonitor\Tests\Checks;
 
-use SiteVitals\Checks\AbstractCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\AbstractCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class DuplicateIdCheck extends AbstractCheck {
 

@@ -1,12 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checks\PhpMemoryCheck;
-use SiteVitals\Checks\PhpDisplayErrorsCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\PhpMemoryCheck;
+use Zer0sh\SiteHealthMonitor\Checks\PhpDisplayErrorsCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class PhpConfigCheckTest extends TestCase {
 

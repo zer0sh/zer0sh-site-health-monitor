@@ -1,12 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checks\PluginsUpdatesCheck;
-use SiteVitals\Checks\ThemesUpdatesCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\PluginsUpdatesCheck;
+use Zer0sh\SiteHealthMonitor\Checks\ThemesUpdatesCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class UpdatesCheckTest extends TestCase {
 

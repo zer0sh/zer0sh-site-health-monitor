@@ -1,13 +1,13 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\MailReport;
-use SiteVitals\Result;
-use SiteVitals\ScanOutcome;
-use SiteVitals\Settings;
+use Zer0sh\SiteHealthMonitor\MailReport;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScanOutcome;
+use Zer0sh\SiteHealthMonitor\Settings;
 
 final class MailReportTest extends TestCase {
 
@@ -101,7 +101,7 @@ final class MailReportTest extends TestCase {
 
 		$this->assertTrue( $result );
 		$this->assertSame( 'ops@example.com', $sent['to'] );
-		$this->assertStringContainsString( 'SiteVitals', $sent['subject'] );
+		$this->assertStringContainsString( 'zer0sh Site Health Monitor', $sent['subject'] );
 		$this->assertStringContainsString( '80/100', $sent['body'] );
 	}
 

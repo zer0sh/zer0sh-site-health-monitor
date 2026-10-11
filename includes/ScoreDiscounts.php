@@ -2,12 +2,12 @@
 /**
  * Tabla base de descuentos del Health Score.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Descuentos por nivel de hallazgo.

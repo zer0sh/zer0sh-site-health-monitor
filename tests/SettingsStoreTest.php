@@ -1,11 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Settings;
-use SiteVitals\SettingsStore;
+use Zer0sh\SiteHealthMonitor\Settings;
+use Zer0sh\SiteHealthMonitor\SettingsStore;
 
 final class SettingsStoreTest extends TestCase {
 

@@ -1,12 +1,12 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checker;
-use SiteVitals\Checks\LocalChecks;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Checker;
+use Zer0sh\SiteHealthMonitor\Checks\LocalChecks;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 final class LocalChecksTest extends TestCase {
 

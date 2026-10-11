@@ -1,18 +1,18 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checker;
-use SiteVitals\Result;
-use SiteVitals\ScanOutcome;
-use SiteVitals\Scanner;
-use SiteVitals\ScoreDiscounts;
-use SiteVitals\Tests\Checks\MultiOkCheck;
-use SiteVitals\Tests\Checks\OkCheck;
-use SiteVitals\Vulnerability;
-use SiteVitals\VulnerabilityClient;
+use Zer0sh\SiteHealthMonitor\Checker;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScanOutcome;
+use Zer0sh\SiteHealthMonitor\Scanner;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\MultiOkCheck;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\OkCheck;
+use Zer0sh\SiteHealthMonitor\Vulnerability;
+use Zer0sh\SiteHealthMonitor\VulnerabilityClient;
 
 final class ScannerTest extends TestCase {
 

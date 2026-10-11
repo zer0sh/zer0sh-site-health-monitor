@@ -2,15 +2,15 @@
 /**
  * Check de actualizaciones de temas.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Detecta temas con actualizaciones pendientes a partir de la transient
@@ -64,7 +64,7 @@ final class ThemesUpdatesCheck extends AbstractCheck implements MultiCheckInterf
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'Outdated themes', 'sitevitals' );
+		return __( 'Outdated themes', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -93,7 +93,7 @@ final class ThemesUpdatesCheck extends AbstractCheck implements MultiCheckInterf
 		foreach ( $outdated as $theme_slug => $new_version ) {
 			$results[] = new Result(
 				'theme/' . (string) $theme_slug,
-				__( 'Outdated theme', 'sitevitals' ),
+				__( 'Outdated theme', 'zer0sh-site-health-monitor' ),
 				Result::SEVERITY_WARNING,
 				array(
 					'theme'       => (string) $theme_slug,
@@ -101,7 +101,7 @@ final class ThemesUpdatesCheck extends AbstractCheck implements MultiCheckInterf
 				),
 				sprintf(
 					/* translators: 1: theme slug, 2: new version, 3: updates URL. */
-					__( 'Theme %1$s has version %2$s available. Update it from the native updates screen: %3$s', 'sitevitals' ),
+					__( 'Theme %1$s has version %2$s available. Update it from the native updates screen: %3$s', 'zer0sh-site-health-monitor' ),
 					(string) $theme_slug,
 					(string) $new_version,
 					$url

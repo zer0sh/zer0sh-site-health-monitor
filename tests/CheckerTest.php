@@ -1,16 +1,16 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checker;
-use SiteVitals\Result;
-use SiteVitals\Tests\Checks\BrokenCheck;
-use SiteVitals\Tests\Checks\BrokenMultiCheck;
-use SiteVitals\Tests\Checks\DuplicateIdCheck;
-use SiteVitals\Tests\Checks\MultiOkCheck;
-use SiteVitals\Tests\Checks\OkCheck;
+use Zer0sh\SiteHealthMonitor\Checker;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\BrokenCheck;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\BrokenMultiCheck;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\DuplicateIdCheck;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\MultiOkCheck;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\OkCheck;
 
 final class CheckerTest extends TestCase {
 

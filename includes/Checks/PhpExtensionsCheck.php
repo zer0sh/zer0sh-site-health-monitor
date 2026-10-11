@@ -2,15 +2,15 @@
 /**
  * Check de las extensiones PHP requeridas por WordPress.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Comprueba que están cargadas las extensiones PHP que WordPress necesita
@@ -62,7 +62,7 @@ final class PhpExtensionsCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'Required PHP extensions', 'sitevitals' );
+		return __( 'Required PHP extensions', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -86,7 +86,7 @@ final class PhpExtensionsCheck extends AbstractCheck {
 			$missing,
 			sprintf(
 				/* translators: %s: list of required PHP extensions not found. */
-				__( 'Missing PHP extensions required by WordPress: %s. Install them for full functionality.', 'sitevitals' ),
+				__( 'Missing PHP extensions required by WordPress: %s. Install them for full functionality.', 'zer0sh-site-health-monitor' ),
 				\implode( ', ', $missing )
 			),
 			ScoreDiscounts::MINOR

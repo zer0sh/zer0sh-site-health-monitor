@@ -2,15 +2,15 @@
 /**
  * Ejecutor principal de los checks locales.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
-use SiteVitals\Checks\CheckInterface;
-use SiteVitals\Checks\MultiCheckInterface;
+use Zer0sh\SiteHealthMonitor\Checks\CheckInterface;
+use Zer0sh\SiteHealthMonitor\Checks\MultiCheckInterface;
 
 /**
  * Registra y ejecuta los checks locales de forma aislada.
@@ -107,7 +107,7 @@ final class Checker {
 							$check->get_title(),
 							Result::SEVERITY_ERROR,
 							null,
-							__( 'The check returned an invalid result.', 'sitevitals' ),
+							__( 'The check returned an invalid result.', 'zer0sh-site-health-monitor' ),
 							0
 						);
 					}
@@ -137,7 +137,7 @@ final class Checker {
 			null,
 			sprintf(
 				/* translators: %s: internal check error message. */
-				__( 'Internal check error: %s', 'sitevitals' ),
+				__( 'Internal check error: %s', 'zer0sh-site-health-monitor' ),
 				$e->getMessage()
 			),
 			0

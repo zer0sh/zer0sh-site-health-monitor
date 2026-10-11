@@ -2,14 +2,14 @@
 /**
  * Base compartida para los checks locales.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Result;
 
 /**
  * Clase base que centraliza la construcción de resultados.

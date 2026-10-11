@@ -2,15 +2,15 @@
 /**
  * Check de la versión de WordPress instalada vs. la estable disponible.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Compara la versión de WordPress instalada con la estable disponible y
@@ -59,6 +59,14 @@ final class WordPressVersionCheck extends AbstractCheck {
 			return (string) \get_bloginfo( 'version' );
 		};
 		$this->available_version_source = $available_version_source ?? static function (): ?array {
+			if ( ! \function_exists( 'get_preferred_from_update_core' ) && \defined( 'ABSPATH' ) && \file_exists( \ABSPATH . 'wp-admin/includes/update.php' ) ) {
+				require_once \ABSPATH . 'wp-admin/includes/update.php';
+			}
+
+			if ( ! \function_exists( 'get_preferred_from_update_core' ) ) {
+				return null;
+			}
+
 			$update = \get_preferred_from_update_core();
 
 			if ( ! \is_object( $update ) || empty( $update->current ) ) {
@@ -90,7 +98,7 @@ final class WordPressVersionCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'WordPress version', 'sitevitals' );
+		return __( 'WordPress version', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -109,7 +117,7 @@ final class WordPressVersionCheck extends AbstractCheck {
 					'available'        => null,
 					'auto_update_mode' => $mode,
 				),
-				__( 'Could not fetch the available stable WordPress version; check the site update cache.', 'sitevitals' )
+				__( 'Could not fetch the available stable WordPress version; check the site update cache.', 'zer0sh-site-health-monitor' )
 			);
 		}
 
@@ -126,7 +134,7 @@ final class WordPressVersionCheck extends AbstractCheck {
 				return $this->result(
 					Result::SEVERITY_INFO,
 					$value,
-					__( 'WordPress is up to date, but automatic updates are disabled; enable them to receive security patches.', 'sitevitals' )
+					__( 'WordPress is up to date, but automatic updates are disabled; enable them to receive security patches.', 'zer0sh-site-health-monitor' )
 				);
 			}
 
@@ -139,7 +147,7 @@ final class WordPressVersionCheck extends AbstractCheck {
 				$value,
 				sprintf(
 					/* translators: 1: installed version, 2: available stable version. */
-					__( 'A WordPress update is pending (installed %1$s, available %2$s). Run the update from the admin.', 'sitevitals' ),
+					__( 'A WordPress update is pending (installed %1$s, available %2$s). Run the update from the admin.', 'zer0sh-site-health-monitor' ),
 					$installed,
 					$available['current']
 				),
@@ -152,7 +160,7 @@ final class WordPressVersionCheck extends AbstractCheck {
 			$value,
 			sprintf(
 				/* translators: 1: installed version, 2: available stable version. */
-				__( 'WordPress %1$s is outdated and automatic updates are disabled; update to %2$s and enable auto-updates.', 'sitevitals' ),
+				__( 'WordPress %1$s is outdated and automatic updates are disabled; update to %2$s and enable auto-updates.', 'zer0sh-site-health-monitor' ),
 				$installed,
 				$available['current']
 			),

@@ -2,15 +2,15 @@
 /**
  * Check de WP_DEBUG_LOG.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Comprueba si el registro de errores de WordPress (WP_DEBUG_LOG) está
@@ -47,7 +47,7 @@ final class DebugLogCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'WordPress error log', 'sitevitals' );
+		return __( 'WordPress error log', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -63,7 +63,7 @@ final class DebugLogCheck extends AbstractCheck {
 		return $this->result(
 			Result::SEVERITY_WARNING,
 			$logging,
-			__( 'WP_DEBUG_LOG is enabled; the debug.log file can contain sensitive data and be publicly accessible. Disable it in production.', 'sitevitals' ),
+			__( 'WP_DEBUG_LOG is enabled; the debug.log file can contain sensitive data and be publicly accessible. Disable it in production.', 'zer0sh-site-health-monitor' ),
 			ScoreDiscounts::MINOR
 		);
 	}

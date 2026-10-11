@@ -2,12 +2,12 @@
 /**
  * Persistencia de los hallazgos ignorados por el usuario.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Guarda y recupera la lista de identificadores de hallazgos ignorados.
@@ -23,7 +23,7 @@ final class IgnoredStore {
 	 *
 	 * @var string
 	 */
-	const OPTION_NAME = 'sitevitals_ignored';
+	const OPTION_NAME = 'zer0sh_shm_ignored';
 
 	/**
 	 * Caracteres permitidos en un identificador de hallazgo.

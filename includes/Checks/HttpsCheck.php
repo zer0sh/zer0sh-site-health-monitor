@@ -2,15 +2,15 @@
 /**
  * Check de HTTPS.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Comprueba si la conexión usa HTTPS o si WordPress fuerza HTTPS por
@@ -62,7 +62,7 @@ final class HttpsCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'HTTPS connection', 'sitevitals' );
+		return __( 'HTTPS connection', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -79,7 +79,7 @@ final class HttpsCheck extends AbstractCheck {
 					'active' => true,
 					'forced' => false,
 				),
-				__( 'The current connection uses HTTPS.', 'sitevitals' )
+				__( 'The current connection uses HTTPS.', 'zer0sh-site-health-monitor' )
 			);
 		}
 
@@ -93,7 +93,7 @@ final class HttpsCheck extends AbstractCheck {
 					'forced'        => true,
 					'siteurl_https' => (bool) ( $config['siteurl_https'] ?? false ),
 				),
-				__( 'HTTPS is configured or enforced, but the current request is not detected as secure (possible reverse proxy or CDN); check the redirect and X-Forwarded-Proto headers.', 'sitevitals' )
+				__( 'HTTPS is configured or enforced, but the current request is not detected as secure (possible reverse proxy or CDN); check the redirect and X-Forwarded-Proto headers.', 'zer0sh-site-health-monitor' )
 			);
 		}
 
@@ -103,7 +103,7 @@ final class HttpsCheck extends AbstractCheck {
 				'active' => false,
 				'forced' => false,
 			),
-			__( 'The site does not enforce HTTPS; redirect all traffic to https and update the site URLs in WordPress settings.', 'sitevitals' ),
+			__( 'The site does not enforce HTTPS; redirect all traffic to https and update the site URLs in WordPress settings.', 'zer0sh-site-health-monitor' ),
 			ScoreDiscounts::MINOR
 		);
 	}

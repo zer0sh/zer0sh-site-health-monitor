@@ -2,15 +2,15 @@
 /**
  * Check de la versión de PHP activa y su estado de soporte.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Evalúa la versión de PHP activa frente a su ciclo de vida (EOL).
@@ -77,7 +77,7 @@ final class PhpVersionCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'PHP version', 'sitevitals' );
+		return __( 'PHP version', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -97,7 +97,7 @@ final class PhpVersionCheck extends AbstractCheck {
 				),
 				sprintf(
 					/* translators: %s: detected PHP version. */
-					__( 'No lifecycle data available for PHP %s; check its official support status.', 'sitevitals' ),
+					__( 'No lifecycle data available for PHP %s; check its official support status.', 'zer0sh-site-health-monitor' ),
 					$version
 				)
 			);
@@ -118,7 +118,7 @@ final class PhpVersionCheck extends AbstractCheck {
 				),
 				sprintf(
 					/* translators: 1: PHP version, 2: EOL date. */
-					__( 'PHP %1$s ended security support on %2$s; update to a supported version.', 'sitevitals' ),
+					__( 'PHP %1$s ended security support on %2$s; update to a supported version.', 'zer0sh-site-health-monitor' ),
 					$version,
 					$security_until
 				),
@@ -136,7 +136,7 @@ final class PhpVersionCheck extends AbstractCheck {
 				),
 				sprintf(
 					/* translators: 1: PHP version, 2: EOL date. */
-					__( 'PHP %1$s will stop receiving security support on %2$s; plan the update.', 'sitevitals' ),
+					__( 'PHP %1$s will stop receiving security support on %2$s; plan the update.', 'zer0sh-site-health-monitor' ),
 					$version,
 					$security_until
 				),

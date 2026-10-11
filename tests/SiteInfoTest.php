@@ -1,10 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Admin\SiteInfo;
+use Zer0sh\SiteHealthMonitor\Admin\SiteInfo;
 
 final class SiteInfoTest extends TestCase {
 

@@ -2,12 +2,12 @@
 /**
  * Persistencia del último resultado de escaneo.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Guarda y recupera el último resultado completo de escaneo.
@@ -23,7 +23,7 @@ final class ScanStore {
 	 *
 	 * @var string
 	 */
-	const OPTION_NAME = 'sitevitals_last_scan';
+	const OPTION_NAME = 'zer0sh_shm_last_scan';
 
 	/**
 	 * Lector de opciones inyectable.

@@ -2,12 +2,12 @@
 /**
  * Resultado inmutable de un check.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Valor de retorno de un check.

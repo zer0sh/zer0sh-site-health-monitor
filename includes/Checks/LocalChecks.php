@@ -2,12 +2,12 @@
 /**
  * Registro de todos los checks locales implementados.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
 /**
  * Enumeración de los checks locales del plugin.

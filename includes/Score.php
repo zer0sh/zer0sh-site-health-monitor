@@ -2,12 +2,12 @@
 /**
  * Health Score del sitio.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Puntuación de salud calculada a partir de los resultados de un escaneo.

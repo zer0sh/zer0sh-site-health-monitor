@@ -2,15 +2,15 @@
 /**
  * Check de Loopback Requests.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Ejecuta una petición loopback segura a la propia instalación.
@@ -65,7 +65,7 @@ final class LoopbackCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'Loopback requests', 'sitevitals' );
+		return __( 'Loopback requests', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -81,7 +81,7 @@ final class LoopbackCheck extends AbstractCheck {
 		return $this->result(
 			Result::SEVERITY_WARNING,
 			$ok,
-			__( 'The loopback request failed (timeout or blocked connection); processes like cron, updates and email sending depend on it. Check firewalls, server rules and DNS.', 'sitevitals' ),
+			__( 'The loopback request failed (timeout or blocked connection); processes like cron, updates and email sending depend on it. Check firewalls, server rules and DNS.', 'zer0sh-site-health-monitor' ),
 			ScoreDiscounts::MINOR
 		);
 	}

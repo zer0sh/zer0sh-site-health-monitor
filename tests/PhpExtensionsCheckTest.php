@@ -1,11 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checks\PhpExtensionsCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\PhpExtensionsCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class PhpExtensionsCheckTest extends TestCase {
 

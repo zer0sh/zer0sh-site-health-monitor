@@ -1,11 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Cron;
-use SiteVitals\Settings;
+use Zer0sh\SiteHealthMonitor\Cron;
+use Zer0sh\SiteHealthMonitor\Settings;
 
 final class CronTest extends TestCase {
 

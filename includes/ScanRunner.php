@@ -2,12 +2,12 @@
 /**
  * Orquestador del flujo completo de un escaneo.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Coordina escaneo, persistencia y notificación por correo.

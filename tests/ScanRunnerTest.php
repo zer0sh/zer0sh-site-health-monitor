@@ -1,19 +1,19 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checker;
-use SiteVitals\MailReport;
-use SiteVitals\Result;
-use SiteVitals\ScanOutcome;
-use SiteVitals\Scanner;
-use SiteVitals\ScanRunner;
-use SiteVitals\ScanStore;
-use SiteVitals\Settings;
-use SiteVitals\Tests\Checks\OkCheck;
-use SiteVitals\VulnerabilityClient;
+use Zer0sh\SiteHealthMonitor\Checker;
+use Zer0sh\SiteHealthMonitor\MailReport;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScanOutcome;
+use Zer0sh\SiteHealthMonitor\Scanner;
+use Zer0sh\SiteHealthMonitor\ScanRunner;
+use Zer0sh\SiteHealthMonitor\ScanStore;
+use Zer0sh\SiteHealthMonitor\Settings;
+use Zer0sh\SiteHealthMonitor\Tests\Checks\OkCheck;
+use Zer0sh\SiteHealthMonitor\VulnerabilityClient;
 
 final class ScanRunnerTest extends TestCase {
 

@@ -2,15 +2,15 @@
 /**
  * Persistencia de la configuración del plugin.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
- * Guarda y recupera los ajustes de SiteVitals.
+ * Guarda y recupera los ajustes de zer0sh Site Health Monitor.
  *
  * Usa una opción de WordPress cuyas funciones get/update se inyectan para
  * poder testearlo standalone. Un valor guardado corrupto se trata como
@@ -23,7 +23,7 @@ final class SettingsStore {
 	 *
 	 * @var string
 	 */
-	const OPTION_NAME = 'sitevitals_settings';
+	const OPTION_NAME = 'zer0sh_shm_settings';
 
 	/**
 	 * Lector de opciones inyectable.

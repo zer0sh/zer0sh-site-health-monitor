@@ -2,12 +2,12 @@
 /**
  * Informe por correo del resultado de un escaneo.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Compone y envía el resumen por correo tras un escaneo.
@@ -136,8 +136,8 @@ final class MailReport {
 	 */
 	public function subject( ScanOutcome $outcome ): string {
 		return sprintf(
-			'[SiteVitals] %s %d/100 — %s',
-			__( 'Health Score', 'sitevitals' ),
+			'[zer0sh Site Health Monitor] %s %d/100 — %s',
+			__( 'Health Score', 'zer0sh-site-health-monitor' ),
 			$outcome->get_total(),
 			$this->state_label( $outcome->get_state() )
 		);
@@ -154,15 +154,15 @@ final class MailReport {
 		$lines = array(
 			sprintf(
 				'%s: %d/100 (%s)',
-				__( 'Health Score', 'sitevitals' ),
+				__( 'Health Score', 'zer0sh-site-health-monitor' ),
 				$outcome->get_total(),
 				$this->state_label( $outcome->get_state() )
 			),
 			'',
-			sprintf( '%s: %d', __( 'Active vulnerabilities', 'sitevitals' ), $outcome->count_vulnerabilities() ),
-			sprintf( '%s: %d', __( 'Pending updates', 'sitevitals' ), $outcome->count_pending_updates() ),
+			sprintf( '%s: %d', __( 'Active vulnerabilities', 'zer0sh-site-health-monitor' ), $outcome->count_vulnerabilities() ),
+			sprintf( '%s: %d', __( 'Pending updates', 'zer0sh-site-health-monitor' ), $outcome->count_pending_updates() ),
 			'',
-			__( 'Findings:', 'sitevitals' ),
+			__( 'Findings:', 'zer0sh-site-health-monitor' ),
 		);
 
 		$added = 0;
@@ -182,7 +182,7 @@ final class MailReport {
 			if ( self::MAX_FINDINGS === $added ) {
 				$lines[] = sprintf(
 					/* translators: %d: number of additional findings. */
-					__( '…and %d more findings.', 'sitevitals' ),
+					__( '…and %d more findings.', 'zer0sh-site-health-monitor' ),
 					$total - $added
 				);
 				break;
@@ -199,7 +199,7 @@ final class MailReport {
 		}
 
 		if ( 0 === $added ) {
-			$lines[] = __( 'No relevant findings detected.', 'sitevitals' );
+			$lines[] = __( 'No relevant findings detected.', 'zer0sh-site-health-monitor' );
 		}
 
 		return implode( "\n", $lines );
@@ -215,14 +215,14 @@ final class MailReport {
 	private function state_label( string $state ): string {
 		switch ( $state ) {
 			case Score::STATE_HEALTHY:
-				return __( 'Healthy', 'sitevitals' );
+				return __( 'Healthy', 'zer0sh-site-health-monitor' );
 
 			case Score::STATE_CRITICAL:
-				return __( 'Critical', 'sitevitals' );
+				return __( 'Critical', 'zer0sh-site-health-monitor' );
 
 			case Score::STATE_ATTENTION:
 			default:
-				return __( 'Needs attention', 'sitevitals' );
+				return __( 'Needs attention', 'zer0sh-site-health-monitor' );
 		}
 	}
 
@@ -236,20 +236,20 @@ final class MailReport {
 	private function severity_label( string $severity ): string {
 		switch ( $severity ) {
 			case Result::SEVERITY_INFO:
-				return __( 'Info', 'sitevitals' );
+				return __( 'Info', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_WARNING:
-				return __( 'Warning', 'sitevitals' );
+				return __( 'Warning', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_CRITICAL:
-				return __( 'Critical', 'sitevitals' );
+				return __( 'Critical', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_ERROR:
-				return __( 'Error', 'sitevitals' );
+				return __( 'Error', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_OK:
 			default:
-				return __( 'Good', 'sitevitals' );
+				return __( 'Good', 'zer0sh-site-health-monitor' );
 		}
 	}
 }

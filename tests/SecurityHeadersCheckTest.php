@@ -1,11 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checks\SecurityHeadersCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\SecurityHeadersCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class SecurityHeadersCheckTest extends TestCase {
 

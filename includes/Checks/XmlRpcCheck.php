@@ -2,15 +2,15 @@
 /**
  * Check de XML-RPC.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Checks;
+namespace Zer0sh\SiteHealthMonitor\Checks;
 
-use SiteVitals\Result;
-use SiteVitals\ScoreDiscounts;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScoreDiscounts;
 
 /**
  * Comprueba si XML-RPC está habilitado o expuesto, ya que se usa en
@@ -48,7 +48,7 @@ final class XmlRpcCheck extends AbstractCheck {
 	 * {@inheritDoc}
 	 */
 	public function get_title(): string {
-		return __( 'XML-RPC', 'sitevitals' );
+		return __( 'XML-RPC', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -64,7 +64,7 @@ final class XmlRpcCheck extends AbstractCheck {
 		return $this->result(
 			Result::SEVERITY_WARNING,
 			$enabled,
-			__( 'XML-RPC is enabled and used in brute-force attacks. Disable it by returning false from the xmlrpc_enabled filter or blocking xmlrpc.php.', 'sitevitals' ),
+			__( 'XML-RPC is enabled and used in brute-force attacks. Disable it by returning false from the xmlrpc_enabled filter or blocking xmlrpc.php.', 'zer0sh-site-health-monitor' ),
 			ScoreDiscounts::MINOR
 		);
 	}

@@ -2,12 +2,12 @@
 /**
  * Resultado completo de un escaneo del sitio.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals;
+namespace Zer0sh\SiteHealthMonitor;
 
 /**
  * Resultado inmutable de un escaneo completo.

@@ -1,15 +1,15 @@
 <?php
 declare( strict_types=1 );
 
-namespace SiteVitals\Tests;
+namespace Zer0sh\SiteHealthMonitor\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SiteVitals\Checks\HttpsCheck;
-use SiteVitals\Checks\DebugCheck;
-use SiteVitals\Checks\DebugLogCheck;
-use SiteVitals\Checks\XmlRpcCheck;
-use SiteVitals\Checks\FileEditCheck;
-use SiteVitals\Result;
+use Zer0sh\SiteHealthMonitor\Checks\HttpsCheck;
+use Zer0sh\SiteHealthMonitor\Checks\DebugCheck;
+use Zer0sh\SiteHealthMonitor\Checks\DebugLogCheck;
+use Zer0sh\SiteHealthMonitor\Checks\XmlRpcCheck;
+use Zer0sh\SiteHealthMonitor\Checks\FileEditCheck;
+use Zer0sh\SiteHealthMonitor\Result;
 
 final class SecurityChecksTest extends TestCase {
 
