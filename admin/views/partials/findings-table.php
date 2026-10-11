@@ -1,47 +1,47 @@
 <?php
 /**
- * Tabla de hallazgos del panel de SiteVitals.
+ * Tabla de hallazgos del panel de zer0sh Site Health Monitor.
  *
  * Vista parcial reutilizada por el dashboard para cada categoría y para
  * los hallazgos ignorados; todas las tablas se renderizan igual.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  *
- * @var array $sitevitals_findings Filas con el formato de DashboardData::finding().
- * @var bool  $sitevitals_restore   true si las filas ya están ignoradas (acción "Restaurar").
+ * @var array $zer0sh_shm_findings Filas con el formato de DashboardData::finding().
+ * @var bool  $zer0sh_shm_restore   true si las filas ya están ignoradas (acción "Restaurar").
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$sitevitals_restore = isset( $sitevitals_restore ) ? (bool) $sitevitals_restore : false;
+$zer0sh_shm_restore = isset( $zer0sh_shm_restore ) ? (bool) $zer0sh_shm_restore : false;
 ?>
-<table class="sitevitals-table">
+<table class="zer0sh-shm-table">
 	<thead>
 		<tr>
-			<th scope="col"><?php esc_html_e( 'Finding', 'sitevitals' ); ?></th>
-			<th scope="col"><?php esc_html_e( 'Description', 'sitevitals' ); ?></th>
-			<th scope="col"><?php esc_html_e( 'Severity', 'sitevitals' ); ?></th>
-			<th scope="col"><?php esc_html_e( 'Action', 'sitevitals' ); ?></th>
+			<th scope="col"><?php esc_html_e( 'Finding', 'zer0sh-site-health-monitor' ); ?></th>
+			<th scope="col"><?php esc_html_e( 'Description', 'zer0sh-site-health-monitor' ); ?></th>
+			<th scope="col"><?php esc_html_e( 'Severity', 'zer0sh-site-health-monitor' ); ?></th>
+			<th scope="col"><?php esc_html_e( 'Action', 'zer0sh-site-health-monitor' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ( $sitevitals_findings as $sitevitals_finding ) : ?>
+		<?php foreach ( $zer0sh_shm_findings as $zer0sh_shm_finding ) : ?>
 			<?php
-			$sitevitals_points_tip = $sitevitals_finding['points'] > 0
+			$zer0sh_shm_points_tip = $zer0sh_shm_finding['points'] > 0
 				? sprintf(
 					/* translators: %d: points deducted from the Health Score. */
-					__( '-%d points', 'sitevitals' ),
-					$sitevitals_finding['points']
+					__( '-%d points', 'zer0sh-site-health-monitor' ),
+					$zer0sh_shm_finding['points']
 				)
 				: '';
-			$sitevitals_is_group = isset( $sitevitals_finding['vulnerabilities'] ) && is_array( $sitevitals_finding['vulnerabilities'] );
+			$zer0sh_shm_is_group = isset( $zer0sh_shm_finding['vulnerabilities'] ) && is_array( $zer0sh_shm_finding['vulnerabilities'] );
 			?>
 			<tr>
-				<td class="sitevitals-finding-cell">
-					<span class="sitevitals-finding-title"><?php echo esc_html( $sitevitals_finding['title'] ); ?></span>
-					<span class="sitevitals-info-icon" title="<?php echo esc_attr( $sitevitals_finding['description'] ); ?>" aria-hidden="true">
+				<td class="zer0sh-shm-finding-cell">
+					<span class="zer0sh-shm-finding-title"><?php echo esc_html( $zer0sh_shm_finding['title'] ); ?></span>
+					<span class="zer0sh-shm-info-icon" title="<?php echo esc_attr( $zer0sh_shm_finding['description'] ); ?>" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
 							<path d="M12 9h.01" />
@@ -49,71 +49,71 @@ $sitevitals_restore = isset( $sitevitals_restore ) ? (bool) $sitevitals_restore 
 						</svg>
 					</span>
 					<br />
-					<span class="sitevitals-finding-id"><?php echo esc_html( $sitevitals_finding['id'] ); ?></span>
-					<?php if ( '' !== $sitevitals_finding['value'] ) : ?>
+					<span class="zer0sh-shm-finding-id"><?php echo esc_html( $zer0sh_shm_finding['id'] ); ?></span>
+					<?php if ( '' !== $zer0sh_shm_finding['value'] ) : ?>
 						<br />
-						<span class="sitevitals-finding-value"><?php echo esc_html( $sitevitals_finding['value'] ); ?></span>
+						<span class="zer0sh-shm-finding-value"><?php echo esc_html( $zer0sh_shm_finding['value'] ); ?></span>
 					<?php endif; ?>
 				</td>
-				<td><?php echo esc_html( $sitevitals_finding['recommendation'] ); ?></td>
+				<td><?php echo esc_html( $zer0sh_shm_finding['recommendation'] ); ?></td>
 				<td>
-					<span class="sitevitals-severity sitevitals-severity-<?php echo esc_attr( $sitevitals_finding['severity'] ); ?>"
-						<?php if ( '' !== $sitevitals_points_tip ) : ?>
-							title="<?php echo esc_attr( $sitevitals_points_tip ); ?>"
+					<span class="zer0sh-shm-severity zer0sh-shm-severity-<?php echo esc_attr( $zer0sh_shm_finding['severity'] ); ?>"
+						<?php if ( '' !== $zer0sh_shm_points_tip ) : ?>
+							title="<?php echo esc_attr( $zer0sh_shm_points_tip ); ?>"
 						<?php endif; ?>
-					><?php echo esc_html( $sitevitals_finding['severity_label'] ); ?></span>
+					><?php echo esc_html( $zer0sh_shm_finding['severity_label'] ); ?></span>
 				</td>
-				<td class="sitevitals-action-col">
-					<?php if ( $sitevitals_restore ) : ?>
-						<a class="sitevitals-ignore-link" href="<?php echo esc_url( \SiteVitals\Admin\AdminPage::toggle_ignored_url( \SiteVitals\Admin\AdminPage::UNIGNORE_ACTION, $sitevitals_finding['id'] ) ); ?>">
-							<?php esc_html_e( 'Restore', 'sitevitals' ); ?>
+				<td class="zer0sh-shm-action-col">
+					<?php if ( $zer0sh_shm_restore ) : ?>
+						<a class="zer0sh-shm-ignore-link" href="<?php echo esc_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::toggle_ignored_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::UNIGNORE_ACTION, $zer0sh_shm_finding['id'] ) ); ?>">
+							<?php esc_html_e( 'Restore', 'zer0sh-site-health-monitor' ); ?>
 						</a>
 					<?php else : ?>
-						<?php if ( '' !== $sitevitals_finding['link'] ) : ?>
-							<a class="sitevitals-action-link" href="<?php echo esc_url( $sitevitals_finding['link'] ); ?>" target="_blank" rel="noreferrer noopener">
-								<?php esc_html_e( 'View source', 'sitevitals' ); ?>
+						<?php if ( '' !== $zer0sh_shm_finding['link'] ) : ?>
+							<a class="zer0sh-shm-action-link" href="<?php echo esc_url( $zer0sh_shm_finding['link'] ); ?>" target="_blank" rel="noreferrer noopener">
+								<?php esc_html_e( 'View source', 'zer0sh-site-health-monitor' ); ?>
 							</a>
-						<?php elseif ( null !== $sitevitals_finding['screen'] ) : ?>
-							<a class="sitevitals-action-link" href="<?php echo esc_url( \SiteVitals\Admin\AdminPage::screen_url( $sitevitals_finding['screen'] ) ); ?>">
-								<?php echo esc_html( \SiteVitals\Admin\AdminPage::screen_label( $sitevitals_finding['screen'] ) ); ?>
+						<?php elseif ( null !== $zer0sh_shm_finding['screen'] ) : ?>
+							<a class="zer0sh-shm-action-link" href="<?php echo esc_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::screen_url( $zer0sh_shm_finding['screen'] ) ); ?>">
+								<?php echo esc_html( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::screen_label( $zer0sh_shm_finding['screen'] ) ); ?>
 							</a>
-						<?php elseif ( ! $sitevitals_finding['is_ok'] ) : ?>
-							<span class="sitevitals-action-disabled"><?php esc_html_e( 'No action available', 'sitevitals' ); ?></span>
+						<?php elseif ( ! $zer0sh_shm_finding['is_ok'] ) : ?>
+							<span class="zer0sh-shm-action-disabled"><?php esc_html_e( 'No action available', 'zer0sh-site-health-monitor' ); ?></span>
 						<?php endif; ?>
-						<?php if ( ! $sitevitals_finding['is_ok'] && ! $sitevitals_is_group ) : ?>
+						<?php if ( ! $zer0sh_shm_finding['is_ok'] && ! $zer0sh_shm_is_group ) : ?>
 							<br />
-							<a class="sitevitals-ignore-link" href="<?php echo esc_url( \SiteVitals\Admin\AdminPage::toggle_ignored_url( \SiteVitals\Admin\AdminPage::IGNORE_ACTION, $sitevitals_finding['id'] ) ); ?>">
-								<?php esc_html_e( 'Ignore', 'sitevitals' ); ?>
+							<a class="zer0sh-shm-ignore-link" href="<?php echo esc_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::toggle_ignored_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::IGNORE_ACTION, $zer0sh_shm_finding['id'] ) ); ?>">
+								<?php esc_html_e( 'Ignore', 'zer0sh-site-health-monitor' ); ?>
 							</a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</td>
 			</tr>
-			<?php if ( $sitevitals_is_group ) : ?>
-				<tr class="sitevitals-sub-row">
+			<?php if ( $zer0sh_shm_is_group ) : ?>
+				<tr class="zer0sh-shm-sub-row">
 					<td colspan="4">
-						<details class="sitevitals-sub-list">
-							<summary><?php esc_html_e( 'Click for details', 'sitevitals' ); ?></summary>
-							<ul class="sitevitals-sub-list-items">
-								<?php foreach ( $sitevitals_finding['vulnerabilities'] as $sitevitals_child ) : ?>
+						<details class="zer0sh-shm-sub-list">
+							<summary><?php esc_html_e( 'Click for details', 'zer0sh-site-health-monitor' ); ?></summary>
+							<ul class="zer0sh-shm-sub-list-items">
+								<?php foreach ( $zer0sh_shm_finding['vulnerabilities'] as $zer0sh_shm_child ) : ?>
 									<?php
-									$sitevitals_child_points_tip = $sitevitals_child['points'] > 0
+									$zer0sh_shm_child_points_tip = $zer0sh_shm_child['points'] > 0
 										? sprintf(
 											/* translators: %d: points deducted from the Health Score. */
-											__( '-%d points', 'sitevitals' ),
-											$sitevitals_child['points']
+											__( '-%d points', 'zer0sh-site-health-monitor' ),
+											$zer0sh_shm_child['points']
 										)
 										: '';
 									?>
 									<li>
-										<span class="sitevitals-sub-body">
-											<span class="sitevitals-sub-severity sitevitals-severity sitevitals-severity-<?php echo esc_attr( $sitevitals_child['severity'] ); ?>"
-												<?php if ( '' !== $sitevitals_child_points_tip ) : ?>
-													title="<?php echo esc_attr( $sitevitals_child_points_tip ); ?>"
+										<span class="zer0sh-shm-sub-body">
+											<span class="zer0sh-shm-sub-severity zer0sh-shm-severity zer0sh-shm-severity-<?php echo esc_attr( $zer0sh_shm_child['severity'] ); ?>"
+												<?php if ( '' !== $zer0sh_shm_child_points_tip ) : ?>
+													title="<?php echo esc_attr( $zer0sh_shm_child_points_tip ); ?>"
 												<?php endif; ?>
-											><?php echo esc_html( $sitevitals_child['severity_label'] ); ?></span>
-											<span class="sitevitals-sub-title"><?php echo esc_html( $sitevitals_child['title'] ); ?></span>
-										<span class="sitevitals-info-icon" title="<?php echo esc_attr( $sitevitals_child['description'] ); ?>" aria-hidden="true">
+											><?php echo esc_html( $zer0sh_shm_child['severity_label'] ); ?></span>
+											<span class="zer0sh-shm-sub-title"><?php echo esc_html( $zer0sh_shm_child['title'] ); ?></span>
+										<span class="zer0sh-shm-info-icon" title="<?php echo esc_attr( $zer0sh_shm_child['description'] ); ?>" aria-hidden="true">
 											<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 												<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
 												<path d="M12 9h.01" />
@@ -121,22 +121,22 @@ $sitevitals_restore = isset( $sitevitals_restore ) ? (bool) $sitevitals_restore 
 											</svg>
 										</span>
 											<br />
-											<span class="sitevitals-sub-id"><?php echo esc_html( $sitevitals_child['id'] ); ?></span>
-											<span class="sitevitals-sub-meta"><?php echo esc_html( $sitevitals_child['recommendation'] ); ?></span>
+											<span class="zer0sh-shm-sub-id"><?php echo esc_html( $zer0sh_shm_child['id'] ); ?></span>
+											<span class="zer0sh-shm-sub-meta"><?php echo esc_html( $zer0sh_shm_child['recommendation'] ); ?></span>
 										</span>
-										<span class="sitevitals-sub-actions">
-											<?php if ( '' !== $sitevitals_child['link'] ) : ?>
-												<a class="sitevitals-action-link" href="<?php echo esc_url( $sitevitals_child['link'] ); ?>" target="_blank" rel="noreferrer noopener">
-													<?php esc_html_e( 'View source', 'sitevitals' ); ?>
+										<span class="zer0sh-shm-sub-actions">
+											<?php if ( '' !== $zer0sh_shm_child['link'] ) : ?>
+												<a class="zer0sh-shm-action-link" href="<?php echo esc_url( $zer0sh_shm_child['link'] ); ?>" target="_blank" rel="noreferrer noopener">
+													<?php esc_html_e( 'View source', 'zer0sh-site-health-monitor' ); ?>
 												</a>
 											<?php endif; ?>
-											<?php if ( $sitevitals_restore ) : ?>
-												<a class="sitevitals-ignore-link" href="<?php echo esc_url( \SiteVitals\Admin\AdminPage::toggle_ignored_url( \SiteVitals\Admin\AdminPage::UNIGNORE_ACTION, $sitevitals_child['id'] ) ); ?>">
-													<?php esc_html_e( 'Restore', 'sitevitals' ); ?>
+											<?php if ( $zer0sh_shm_restore ) : ?>
+												<a class="zer0sh-shm-ignore-link" href="<?php echo esc_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::toggle_ignored_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::UNIGNORE_ACTION, $zer0sh_shm_child['id'] ) ); ?>">
+													<?php esc_html_e( 'Restore', 'zer0sh-site-health-monitor' ); ?>
 												</a>
-											<?php elseif ( ! $sitevitals_child['is_ok'] ) : ?>
-												<a class="sitevitals-ignore-link" href="<?php echo esc_url( \SiteVitals\Admin\AdminPage::toggle_ignored_url( \SiteVitals\Admin\AdminPage::IGNORE_ACTION, $sitevitals_child['id'] ) ); ?>">
-													<?php esc_html_e( 'Ignore', 'sitevitals' ); ?>
+											<?php elseif ( ! $zer0sh_shm_child['is_ok'] ) : ?>
+												<a class="zer0sh-shm-ignore-link" href="<?php echo esc_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::toggle_ignored_url( \Zer0sh\SiteHealthMonitor\Admin\AdminPage::IGNORE_ACTION, $zer0sh_shm_child['id'] ) ); ?>">
+													<?php esc_html_e( 'Ignore', 'zer0sh-site-health-monitor' ); ?>
 												</a>
 											<?php endif; ?>
 										</span>

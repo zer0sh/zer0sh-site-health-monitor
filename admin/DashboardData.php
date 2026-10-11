@@ -2,16 +2,16 @@
 /**
  * Presentación de los datos del último escaneo para el panel.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Admin;
+namespace Zer0sh\SiteHealthMonitor\Admin;
 
-use SiteVitals\Result;
-use SiteVitals\ScanOutcome;
-use SiteVitals\Score;
+use Zer0sh\SiteHealthMonitor\Result;
+use Zer0sh\SiteHealthMonitor\ScanOutcome;
+use Zer0sh\SiteHealthMonitor\Score;
 
 /**
  * Convierte un ScanOutcome en un array plano pensado para la vista.
@@ -261,7 +261,7 @@ final class DashboardData {
 		$parts = explode( '/', (string) $top['id'] );
 		$type  = isset( $parts[1] ) ? $parts[1] : '';
 		$slug  = isset( $parts[2] ) ? $parts[2] : '';
-		$title = 'core' === $type ? __( 'WordPress', 'sitevitals' ) : $slug;
+		$title = 'core' === $type ? __( 'WordPress', 'zer0sh-site-health-monitor' ) : $slug;
 
 		return array(
 			'id'              => 'vuln/' . $type . '/' . $slug,
@@ -271,7 +271,7 @@ final class DashboardData {
 			'description'     => $top['description'],
 			'recommendation'  => sprintf(
 				/* translators: 1: number of CVEs, 2: affected component. */
-				__( 'Detected %1$d CVEs related to %2$s. Update soon.', 'sitevitals' ),
+				__( 'Detected %1$d CVEs related to %2$s. Update soon.', 'zer0sh-site-health-monitor' ),
 				count( $items ),
 				$title
 			),
@@ -318,83 +318,83 @@ final class DashboardData {
 	private static function check_description( string $id ): string {
 		switch ( $id ) {
 			case 'core/version':
-				return __( 'Installed WordPress core version and available updates.', 'sitevitals' );
+				return __( 'Installed WordPress core version and available updates.', 'zer0sh-site-health-monitor' );
 
 			case 'php/version':
-				return __( 'Server PHP version and its support lifecycle status.', 'sitevitals' );
+				return __( 'Server PHP version and its support lifecycle status.', 'zer0sh-site-health-monitor' );
 
 			case 'php/memory':
-				return __( 'Configured memory limit for PHP (memory_limit).', 'sitevitals' );
+				return __( 'Configured memory limit for PHP (memory_limit).', 'zer0sh-site-health-monitor' );
 
 			case 'php/display_errors':
-				return __( 'Whether PHP errors are visible on the site (display_errors).', 'sitevitals' );
+				return __( 'Whether PHP errors are visible on the site (display_errors).', 'zer0sh-site-health-monitor' );
 
 			case 'php/extensions':
-				return __( 'PHP extensions required by WordPress and their availability.', 'sitevitals' );
+				return __( 'PHP extensions required by WordPress and their availability.', 'zer0sh-site-health-monitor' );
 
 			case 'security/https':
-				return __( 'HTTPS: secure protocol that encrypts communication between visitors and your site.', 'sitevitals' );
+				return __( 'HTTPS: secure protocol that encrypts communication between visitors and your site.', 'zer0sh-site-health-monitor' );
 
 			case 'security/xmlrpc':
-				return __( 'XML-RPC: interface to publish content from external clients; often targeted by brute force.', 'sitevitals' );
+				return __( 'XML-RPC: interface to publish content from external clients; often targeted by brute force.', 'zer0sh-site-health-monitor' );
 
 			case 'security/debug':
-				return __( 'WordPress debug mode (WP_DEBUG) and whether it is safe for production.', 'sitevitals' );
+				return __( 'WordPress debug mode (WP_DEBUG) and whether it is safe for production.', 'zer0sh-site-health-monitor' );
 
 			case 'security/debug_log':
-				return __( 'WordPress PHP error log (WP_DEBUG_LOG) and its exposure.', 'sitevitals' );
+				return __( 'WordPress PHP error log (WP_DEBUG_LOG) and its exposure.', 'zer0sh-site-health-monitor' );
 
 			case 'security/file_edit':
-				return __( 'Whether plugin and theme files can be edited from the admin (DISALLOW_FILE_EDIT).', 'sitevitals' );
+				return __( 'Whether plugin and theme files can be edited from the admin (DISALLOW_FILE_EDIT).', 'zer0sh-site-health-monitor' );
 
 			case 'system/cron':
-				return __( 'WP-Cron: WordPress built-in scheduler for periodic tasks.', 'sitevitals' );
+				return __( 'WP-Cron: WordPress built-in scheduler for periodic tasks.', 'zer0sh-site-health-monitor' );
 
 			case 'system/loopback':
-				return __( 'Loopback: whether WordPress can communicate with itself; required by WP-Cron and Site Health.', 'sitevitals' );
+				return __( 'Loopback: whether WordPress can communicate with itself; required by WP-Cron and Site Health.', 'zer0sh-site-health-monitor' );
 
 			case 'components/plugins':
-				return __( 'Installed plugins and their pending updates.', 'sitevitals' );
+				return __( 'Installed plugins and their pending updates.', 'zer0sh-site-health-monitor' );
 
 			case 'components/themes':
-				return __( 'Installed themes and their pending updates.', 'sitevitals' );
+				return __( 'Installed themes and their pending updates.', 'zer0sh-site-health-monitor' );
 
 			case 'headers/x-content-type-options':
-				return __( 'Header that prevents browsers from interpreting files as a MIME type other than declared.', 'sitevitals' );
+				return __( 'Header that prevents browsers from interpreting files as a MIME type other than declared.', 'zer0sh-site-health-monitor' );
 
 			case 'headers/x-frame-options':
-				return __( 'Header that stops your site from being displayed inside third-party iframes (anti-clickjacking).', 'sitevitals' );
+				return __( 'Header that stops your site from being displayed inside third-party iframes (anti-clickjacking).', 'zer0sh-site-health-monitor' );
 
 			case 'headers/content-security-policy':
-				return __( 'Header that restricts the origins and resources the browser can load.', 'sitevitals' );
+				return __( 'Header that restricts the origins and resources the browser can load.', 'zer0sh-site-health-monitor' );
 
 			case 'headers/referrer-policy':
-				return __( 'Header that controls the referrer information shared with other sites.', 'sitevitals' );
+				return __( 'Header that controls the referrer information shared with other sites.', 'zer0sh-site-health-monitor' );
 
 			case 'headers/permissions-policy':
-				return __( 'Header that limits which browser APIs your pages can use.', 'sitevitals' );
+				return __( 'Header that limits which browser APIs your pages can use.', 'zer0sh-site-health-monitor' );
 
 			case 'headers/strict-transport-security':
-				return __( 'Header that forces the browser to always connect over HTTPS.', 'sitevitals' );
+				return __( 'Header that forces the browser to always connect over HTTPS.', 'zer0sh-site-health-monitor' );
 		}
 
 		if ( 0 === strpos( $id, 'headers/' ) ) {
-			return __( 'Security HTTP header sent by the server with each response.', 'sitevitals' );
+			return __( 'Security HTTP header sent by the server with each response.', 'zer0sh-site-health-monitor' );
 		}
 
 		if ( 0 === strpos( $id, 'plugin/' ) ) {
-			return __( 'Installed plugins and their pending updates.', 'sitevitals' );
+			return __( 'Installed plugins and their pending updates.', 'zer0sh-site-health-monitor' );
 		}
 
 		if ( 0 === strpos( $id, 'theme/' ) ) {
-			return __( 'Installed themes and their pending updates.', 'sitevitals' );
+			return __( 'Installed themes and their pending updates.', 'zer0sh-site-health-monitor' );
 		}
 
 		if ( 0 === strpos( $id, 'vuln/' ) ) {
-			return __( 'Vulnerability listed in the WordPress security registry (WPScan).', 'sitevitals' );
+			return __( 'Vulnerability listed in the WordPress security registry (WPScan).', 'zer0sh-site-health-monitor' );
 		}
 
-		return __( 'Site health, security and performance check.', 'sitevitals' );
+		return __( 'Site health, security and performance check.', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -518,14 +518,14 @@ final class DashboardData {
 	public static function score_label( string $state ): string {
 		switch ( $state ) {
 			case Score::STATE_HEALTHY:
-				return __( 'Healthy', 'sitevitals' );
+				return __( 'Healthy', 'zer0sh-site-health-monitor' );
 
 			case Score::STATE_ATTENTION:
-				return __( 'Needs attention', 'sitevitals' );
+				return __( 'Needs attention', 'zer0sh-site-health-monitor' );
 
 			case Score::STATE_CRITICAL:
 			default:
-				return __( 'Critical', 'sitevitals' );
+				return __( 'Critical', 'zer0sh-site-health-monitor' );
 		}
 	}
 
@@ -538,10 +538,10 @@ final class DashboardData {
 	 */
 	public static function origin_label( string $origin ): string {
 		if ( ScanOutcome::ORIGIN_MANUAL === $origin ) {
-			return __( 'Manual', 'sitevitals' );
+			return __( 'Manual', 'zer0sh-site-health-monitor' );
 		}
 
-		return __( 'Scheduled', 'sitevitals' );
+		return __( 'Scheduled', 'zer0sh-site-health-monitor' );
 	}
 
 	/**
@@ -554,20 +554,20 @@ final class DashboardData {
 	public static function severity_label( string $severity ): string {
 		switch ( $severity ) {
 			case Result::SEVERITY_OK:
-				return __( 'Good', 'sitevitals' );
+				return __( 'Good', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_INFO:
-				return __( 'Info', 'sitevitals' );
+				return __( 'Info', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_WARNING:
-				return __( 'Warning', 'sitevitals' );
+				return __( 'Warning', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_CRITICAL:
-				return __( 'Critical', 'sitevitals' );
+				return __( 'Critical', 'zer0sh-site-health-monitor' );
 
 			case Result::SEVERITY_ERROR:
 			default:
-				return __( 'Error', 'sitevitals' );
+				return __( 'Error', 'zer0sh-site-health-monitor' );
 		}
 	}
 
@@ -581,28 +581,28 @@ final class DashboardData {
 	public static function category_label( string $key ): string {
 		switch ( $key ) {
 			case 'core':
-				return __( 'WordPress core', 'sitevitals' );
+				return __( 'WordPress core', 'zer0sh-site-health-monitor' );
 
 			case 'php':
-				return __( 'PHP', 'sitevitals' );
+				return __( 'PHP', 'zer0sh-site-health-monitor' );
 
 			case 'security':
-				return __( 'Security', 'sitevitals' );
+				return __( 'Security', 'zer0sh-site-health-monitor' );
 
 			case 'system':
-				return __( 'System', 'sitevitals' );
+				return __( 'System', 'zer0sh-site-health-monitor' );
 
 			case 'headers':
-				return __( 'Security headers', 'sitevitals' );
+				return __( 'Security headers', 'zer0sh-site-health-monitor' );
 
 			case 'plugin':
-				return __( 'Plugins', 'sitevitals' );
+				return __( 'Plugins', 'zer0sh-site-health-monitor' );
 
 			case 'theme':
-				return __( 'Themes', 'sitevitals' );
+				return __( 'Themes', 'zer0sh-site-health-monitor' );
 
 			case 'vuln':
-				return __( 'Vulnerabilities', 'sitevitals' );
+				return __( 'Vulnerabilities', 'zer0sh-site-health-monitor' );
 
 			default:
 				return $key;

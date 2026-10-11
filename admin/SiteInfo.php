@@ -2,12 +2,12 @@
 /**
  * Datos estáticos del sitio para el panel.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Admin;
+namespace Zer0sh\SiteHealthMonitor\Admin;
 
 /**
  * Transformador puro de la información estática del sitio.

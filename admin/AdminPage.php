@@ -2,20 +2,20 @@
 /**
  * Pantallas de administración del plugin.
  *
- * @package SiteVitals
+ * @package Zer0shSiteHealthMonitor
  */
 
 declare( strict_types=1 );
 
-namespace SiteVitals\Admin;
+namespace Zer0sh\SiteHealthMonitor\Admin;
 
-use SiteVitals\Cron;
-use SiteVitals\IgnoredStore;
-use SiteVitals\ScanOutcome;
-use SiteVitals\ScanRunner;
-use SiteVitals\ScanStore;
-use SiteVitals\Settings;
-use SiteVitals\SettingsStore;
+use Zer0sh\SiteHealthMonitor\Cron;
+use Zer0sh\SiteHealthMonitor\IgnoredStore;
+use Zer0sh\SiteHealthMonitor\ScanOutcome;
+use Zer0sh\SiteHealthMonitor\ScanRunner;
+use Zer0sh\SiteHealthMonitor\ScanStore;
+use Zer0sh\SiteHealthMonitor\Settings;
+use Zer0sh\SiteHealthMonitor\SettingsStore;
 
 /**
  * Registra el panel y la pantalla de ajustes y atiende sus formularios.
@@ -31,56 +31,56 @@ final class AdminPage {
 	 *
 	 * @var string
 	 */
-	const SLUG = 'sitevitals';
+	const SLUG = 'zer0sh-site-health-monitor';
 
 	/**
 	 * Slug de la pantalla de ajustes.
 	 *
 	 * @var string
 	 */
-	const SLUG_SETTINGS = 'sitevitals-settings';
+	const SLUG_SETTINGS = 'zer0sh-site-health-monitor-settings';
 
 	/**
 	 * Acción admin_post del escaneo manual.
 	 *
 	 * @var string
 	 */
-	const SCAN_ACTION = 'sitevitals_scan';
+	const SCAN_ACTION = 'zer0sh_shm_scan';
 
 	/**
 	 * Acción admin_post de guardado de ajustes.
 	 *
 	 * @var string
 	 */
-	const SETTINGS_ACTION = 'sitevitals_settings';
+	const SETTINGS_ACTION = 'zer0sh_shm_settings';
 
 	/**
 	 * Acción admin_post para ignorar un hallazgo.
 	 *
 	 * @var string
 	 */
-	const IGNORE_ACTION = 'sitevitals_ignore';
+	const IGNORE_ACTION = 'zer0sh_shm_ignore';
 
 	/**
 	 * Acción admin_post para restaurar un hallazgo ignorado.
 	 *
 	 * @var string
 	 */
-	const UNIGNORE_ACTION = 'sitevitals_unignore';
+	const UNIGNORE_ACTION = 'zer0sh_shm_unignore';
 
 	/**
 	 * Acción admin_post para restaurar todos los ignorados.
 	 *
 	 * @var string
 	 */
-	const RESTORE_ALL_ACTION = 'sitevitals_restore_all';
+	const RESTORE_ALL_ACTION = 'zer0sh_shm_restore_all';
 
 	/**
 	 * Clave de la transient que bloquea escaneos simultáneos.
 	 *
 	 * @var string
 	 */
-	const LOCK_KEY = 'sitevitals_scan_lock';
+	const LOCK_KEY = 'zer0sh_shm_scan_lock';
 
 	/**
 	 * Segundos de vigencia del bloqueo del escaneo.
@@ -95,8 +95,8 @@ final class AdminPage {
 	 * @var string[]
 	 */
 	const SCREENS = array(
-		'toplevel_page_sitevitals',
-		'sitevitals_page_sitevitals-settings',
+		'toplevel_page_zer0sh-site-health-monitor',
+		'zer0sh-site-health-monitor_page_zer0sh-site-health-monitor-settings',
 	);
 
 	/**
@@ -173,8 +173,8 @@ final class AdminPage {
 	 */
 	public function register_menu(): void {
 		\add_menu_page(
-			__( 'Vitals', 'sitevitals' ),
-			__( 'Vitals', 'sitevitals' ),
+			__( 'zer0sh Site Health Monitor', 'zer0sh-site-health-monitor' ),
+			__( 'Health Monitor', 'zer0sh-site-health-monitor' ),
 			'manage_options',
 			self::SLUG,
 			array( $this, 'render' ),
@@ -184,8 +184,8 @@ final class AdminPage {
 
 		\add_submenu_page(
 			self::SLUG,
-			__( 'Settings', 'sitevitals' ),
-			__( 'Settings', 'sitevitals' ),
+			__( 'Settings', 'zer0sh-site-health-monitor' ),
+			__( 'Settings', 'zer0sh-site-health-monitor' ),
 			'manage_options',
 			self::SLUG_SETTINGS,
 			array( $this, 'render_settings' )
@@ -199,14 +199,14 @@ final class AdminPage {
 	 */
 	public function handle_scan(): void {
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to run a scan.', 'sitevitals' ) );
+			\wp_die( \esc_html__( 'You do not have permission to run a scan.', 'zer0sh-site-health-monitor' ) );
 		}
 
 		\check_admin_referer( self::SCAN_ACTION );
 
 		if ( false !== \get_transient( self::LOCK_KEY ) ) {
 			\wp_safe_redirect(
-				\add_query_arg( 'sitevitals_scan', 'busy', \admin_url( 'admin.php?page=' . self::SLUG ) )
+				\add_query_arg( 'zer0sh_shm_scan', 'busy', \admin_url( 'admin.php?page=' . self::SLUG ) )
 			);
 			exit;
 		}
@@ -223,7 +223,7 @@ final class AdminPage {
 		\delete_transient( self::LOCK_KEY );
 
 		\wp_safe_redirect(
-			\add_query_arg( 'sitevitals_scan', $status, \admin_url( 'admin.php?page=' . self::SLUG ) )
+			\add_query_arg( 'zer0sh_shm_scan', $status, \admin_url( 'admin.php?page=' . self::SLUG ) )
 		);
 		exit;
 	}
@@ -235,13 +235,13 @@ final class AdminPage {
 	 */
 	public function handle_settings(): void {
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to modify the settings.', 'sitevitals' ) );
+			\wp_die( \esc_html__( 'You do not have permission to modify the settings.', 'zer0sh-site-health-monitor' ) );
 		}
 
 		\check_admin_referer( self::SETTINGS_ACTION );
 
 		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing -- Los campos crudos del formulario se sanean en Settings::from_unsafe() con sanitize_email/is_email; la existencia se comprueba dentro del propio helper.
-		$raw = isset( $_POST['sitevitals'] ) && is_array( $_POST['sitevitals'] ) ? $_POST['sitevitals'] : array();
+		$raw = isset( $_POST['zer0sh_shm'] ) && is_array( $_POST['zer0sh_shm'] ) ? $_POST['zer0sh_shm'] : array();
 		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
 
 		$settings = Settings::from_unsafe( $raw );
@@ -250,7 +250,7 @@ final class AdminPage {
 		$this->cron->schedule( $settings );
 
 		\wp_safe_redirect(
-			\add_query_arg( 'sitevitals_settings', 'updated', \admin_url( 'admin.php?page=' . self::SLUG_SETTINGS ) )
+			\add_query_arg( 'zer0sh_shm_settings', 'updated', \admin_url( 'admin.php?page=' . self::SLUG_SETTINGS ) )
 		);
 		exit;
 	}
@@ -280,7 +280,7 @@ final class AdminPage {
 	 */
 	public function handle_restore_all(): void {
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to modify ignored findings.', 'sitevitals' ) );
+			\wp_die( \esc_html__( 'You do not have permission to modify ignored findings.', 'zer0sh-site-health-monitor' ) );
 		}
 
 		\check_admin_referer( self::RESTORE_ALL_ACTION );
@@ -288,7 +288,7 @@ final class AdminPage {
 		$this->ignored_store->clear();
 
 		\wp_safe_redirect(
-			\add_query_arg( 'sitevitals_scan', 'restored_all', \admin_url( 'admin.php?page=' . self::SLUG ) )
+			\add_query_arg( 'zer0sh_shm_scan', 'restored_all', \admin_url( 'admin.php?page=' . self::SLUG ) )
 		);
 		exit;
 	}
@@ -303,7 +303,7 @@ final class AdminPage {
 	 */
 	private function toggle_ignored( string $action, string $status ): void {
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to modify ignored findings.', 'sitevitals' ) );
+			\wp_die( \esc_html__( 'You do not have permission to modify ignored findings.', 'zer0sh-site-health-monitor' ) );
 		}
 
 		\check_admin_referer( $action );
@@ -327,7 +327,7 @@ final class AdminPage {
 		}
 
 		\wp_safe_redirect(
-			\add_query_arg( 'sitevitals_scan', $status, \admin_url( 'admin.php?page=' . self::SLUG ) )
+			\add_query_arg( 'zer0sh_shm_scan', $status, \admin_url( 'admin.php?page=' . self::SLUG ) )
 		);
 		exit;
 	}
@@ -345,10 +345,10 @@ final class AdminPage {
 		}
 
 		\wp_enqueue_style(
-			'sitevitals-admin',
-			\plugin_dir_url( \SITEVITALS_PLUGIN_FILE ) . 'assets/css/admin.css',
+			'zer0sh-shm-admin',
+			\plugin_dir_url( \ZER0SH_SHM_PLUGIN_FILE ) . 'assets/css/admin.css',
 			array(),
-			\SITEVITALS_VERSION
+			\ZER0SH_SHM_VERSION
 		);
 	}
 
@@ -359,7 +359,7 @@ final class AdminPage {
 	 */
 	public function render(): void {
 		$data                 = DashboardData::build( $this->store->get(), $this->ignored_store->get() );
-		$data['notice']       = self::query_status( 'sitevitals_scan' );
+		$data['notice']       = self::query_status( 'zer0sh_shm_scan' );
 		$data['settings']     = $this->settings_store->get();
 		$data['next_run']     = $this->cron->next_run();
 		$data['site']         = SiteInfo::build();
@@ -375,7 +375,7 @@ final class AdminPage {
 	 */
 	public function render_settings(): void {
 		$data             = array();
-		$data['notice']   = self::query_status( 'sitevitals_settings' );
+		$data['notice']   = self::query_status( 'zer0sh_shm_settings' );
 		$data['settings'] = $this->settings_store->get();
 		$data['next_run'] = $this->cron->next_run();
 
@@ -472,19 +472,19 @@ final class AdminPage {
 	public static function screen_label( ?string $screen ): string {
 		switch ( $screen ) {
 			case 'plugins':
-				return __( 'Plugins', 'sitevitals' );
+				return __( 'Plugins', 'zer0sh-site-health-monitor' );
 
 			case 'themes':
-				return __( 'Themes', 'sitevitals' );
+				return __( 'Themes', 'zer0sh-site-health-monitor' );
 
 			case 'update-core':
-				return __( 'Updates', 'sitevitals' );
+				return __( 'Updates', 'zer0sh-site-health-monitor' );
 
 			case 'options-general':
-				return __( 'General settings', 'sitevitals' );
+				return __( 'General settings', 'zer0sh-site-health-monitor' );
 
 			case 'site-health':
-				return __( 'Site health', 'sitevitals' );
+				return __( 'Site health', 'zer0sh-site-health-monitor' );
 
 			default:
 				return '';
