@@ -1,88 +1,79 @@
-# WordPress Health & Operations Platform
+# zer0sh Site Health Monitor
 
-![Banner](docs/assets/SiteVitals.png)
+![Banner](docs/assets/banner.png)
+
+> Plugin open source ultra ligero para diagnosticar de forma integral la salud, seguridad, vulnerabilidades y configuración de cualquier sitio WordPress en una única pantalla.
 
 ## ¿Qué es?
 
-Una herramienta Open Source para evaluar de forma integral el estado de una instalación WordPress.
+**zer0sh Site Health Monitor** es un plugin de WordPress de solo lectura diseñado para responder a una pregunta fundamental de mantenimiento: ***¿Está mi WordPress actualizado, soportado, seguro y correctamente configurado?***
 
-## ¿Por qué existe?
-
-Para ofrecer una plataforma unificada que responda: **¿Está mi WordPress actualizado, soportado, seguro, correctamente configurado, disponible y funcionando correctamente?** Priorizando la utilidad real, la privacidad y la simplicidad.
+El plugin prioriza la simplicidad, la privacidad absoluta del sitio y la ausencia de dependencias pesadas:
+* **100% Read-only**: No modifica archivos, base de datos ni configuraciones del servidor automáticamente.
+* **Cero telemetría**: No rastrea actividad, no requiere cuentas de usuario ni API keys de pago.
+* **Ultra ligero**: Diagnósticos en local con caché nativa en transients (12 horas por defecto).
 
 ## ¿Qué comprueba?
 
-Esta plataforma comprobará aspectos clave de tu instalación WordPress, incluyendo:
-
-*   Versión de WordPress, plugins y temas, y sus actualizaciones disponibles.
-*   Vulnerabilidades conocidas en componentes (WordPress, plugins, temas).
-*   Versión de PHP y su estado de soporte.
-*   Configuración básica de seguridad (HTTPS, XML-RPC, debug mode).
-*   Aspectos de salud general y fiabilidad.
+* **Entorno PHP**: Versión activa y estado de soporte oficial (EOL), `memory_limit`, `display_errors`, extensiones obligatorias de WordPress.
+* **WordPress Core**: Versión instalada vs versión estable disponible y estado de auto-actualizaciones.
+* **Actualizaciones**: Detección de plugins y temas activos con versiones pendientes.
+* **Seguridad del sitio**: Conexión HTTPS forzada, estado de XML-RPC, edición de archivos (`DISALLOW_FILE_EDIT`), modo debug (`WP_DEBUG`/`WP_DEBUG_LOG`) y cabeceras de seguridad HTTP (`HSTS`, `CSP`, `X-Frame-Options`, `X-Content-Type-Options`).
+* **Salud y fiabilidad**: Programador `WP-Cron` y peticiones loopback del servidor.
+* **Vulnerabilidades conocidas**: Consulta transparente a la base de datos pública de **WPVulnerability API** (sin enviar datos sensibles del sitio ni credenciales).
 
 ## Capturas
 
 ### Dashboard
+![Dashboard de zer0sh Site Health Monitor](docs/assets/Dashboard.png)
 
-![Dashboard de SiteVitals](docs/assets/Dashboard.png)
+### Ajustes y Reportes
+![Ajustes de zer0sh Site Health Monitor](docs/assets/settings.png)
 
-### Ajustes
+## Instalación y Entorno Local
 
-![Ajustes de SiteVitals](docs/assets/settings.png)
+### Requisitos
+* WordPress 6.5 o superior.
+* PHP 7.4 o superior (compatible con PHP 8.0, 8.1, 8.2, 8.3, 8.4 y 8.5).
 
-## ¿Cómo instalarlo?
+### Entorno de desarrollo local (Docker)
 
-### Entorno Local de Desarrollo (Docker)
-
-Para iniciar el entorno local con Docker Compose:
+El proyecto incluye un entorno Docker Compose listo para usar:
 
 ```bash
-cd docker
-docker compose up -d
+# Levantar el entorno
+make up
+
+# Detener el entorno
+make down
+
+# Reiniciar
+make restart
 ```
 
-WordPress estará disponible en `http://localhost:8080`. El plugin se monta automáticamente en `wp-content/plugins/sitevitals`.
-
-#### Procedimiento para detener el entorno local:
-```bash
-cd docker
-docker compose down
-```
-
-#### Procedimiento para reiniciar el entorno local:
-```bash
-cd docker
-docker compose restart
-```
+WordPress estará disponible en `http://localhost:18080`. El plugin se monta automáticamente en `wp-content/plugins/zer0sh-site-health-monitor`.
 
 ## Calidad y herramientas de desarrollo
 
-Las dependencias de desarrollo (PHPUnit, PHPCS y WordPress Coding Standards) se gestionan con Composer a través del contenedor `composer`:
+El proyecto sigue estrictamente los estándares de código de WordPress (WPCS) y arquitectura PSR-4:
 
 ```bash
-# Instalar/actualizar dependencias
+# Instalar dependencias de desarrollo (PHPCS, WPCS, PHPUnit)
 make composer-install
 
 # Verificar estándares de código (PHPCS)
 make lint
 
-# Corregir automáticamente errores de formato (PHPCBF)
+# Corregir automáticamente errores de estilo (PHPCBF)
 make lint:fix
 
-# Ejecutar tests unitarios (PHPUnit)
+# Ejecutar suite de pruebas unitarias (PHPUnit)
 make test
+
+# Generar el paquete ZIP limpio para distribución en WordPress.org
+make package
 ```
 
-Alternativamente, los mismos comandos se pueden ejecutar dentro de `docker/` con Docker Compose:
+## Licencia
 
-```bash
-docker compose run --rm composer install
-docker compose run --rm composer run lint
-docker compose run --rm composer run test
-```
-
-El estándar de código está configurado en `phpcs.xml.dist` (WordPress Coding Standards, excluyendo `vendor/`, `docker/` y `tests/`) y la base de PHPUnit en `phpunit.xml.dist`.
-
-## ¿Cómo contribuir?
-
-*(Guía de contribución detallada se añadirá aquí en el futuro.)*
+Este proyecto está bajo la licencia [GPLv2 o posterior](LICENSE).

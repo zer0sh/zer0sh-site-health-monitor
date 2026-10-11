@@ -11,6 +11,15 @@
 
 ## [Unreleased]
 
+### Subsanación de revisión WordPress.org Plugin Directory (Fase 16)
+
+- **Nombre y Slug**: Renombrado a `zer0sh Site Health Monitor` (slug `zer0sh-site-health-monitor`), archivo principal `zer0sh-site-health-monitor.php`, evitando conflicto de marcas en el directorio oficial.
+- **Autoría y Contribuidores**: Corregido `Contributors: zer0sh` en `readme.txt` y `Author: zer0sh` en cabecera PHP, alineado con la cuenta de WordPress.org.
+- **Alineación de Descripciones**: Eliminadas referencias a monitorización de *uptime* e integración ficticia con *Tools → Site Health*; descripción ajustada exactamente a las capacidades reales.
+- **Servicios Externos**: Incorporada sección obligatoria `== External services ==` en `readme.txt` documentando la API de WPVulnerability (ROBOTSTXT), datos transmitidos y enlaces a términos/privacidad.
+- **Internacionalización**: Text domain actualizado a `zer0sh-site-health-monitor` en todas las funciones i18n y en `phpcs.xml.dist`. Eliminados `.mo`/`.po` del paquete para delegar la generación a `translate.wordpress.org`, conservando la plantilla `languages/zer0sh-site-health-monitor.pot`.
+- **Empaquetado**: Nuevo comando `make package` optimizado que excluye dependencias dev de Composer, reduciendo el ZIP de ~5MB a ~196KB.
+
 ### Interfaz
 
 - Sustituidos los iconos genéricos del dashboard por trazos inline de Tabler Icons, con licencia MIT.
