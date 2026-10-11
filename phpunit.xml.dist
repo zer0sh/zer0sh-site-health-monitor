@@ -8,7 +8,7 @@
 	failOnWarning="true"
 	>
 	<testsuites>
-		<testsuite name="sitevitals">
+		<testsuite name="zer0sh-site-health-monitor">
 			<directory>tests/</directory>
 		</testsuite>
 	</testsuites>

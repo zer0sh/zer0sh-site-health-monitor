@@ -26,7 +26,7 @@ services:
     volumes:
       - ../wp-content/plugins:/var/www/html/wp-content/plugins
       - ../:/var/www/html/wp-content/plugins/zer0sh-site-health-monitor
-      - sitevitals_source_content:/var/www/html/wp-content/plugins/zer0sh-site-health-monitor/wp-content
+      - zer0sh_shm_source_content:/var/www/html/wp-content/plugins/zer0sh-site-health-monitor/wp-content
 
   # 3. Tooling
   composer:
@@ -38,4 +38,4 @@ services:
 
 volumes:
   db_data:
-  sitevitals_source_content:
+  zer0sh_shm_source_content:

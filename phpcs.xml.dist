@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="SiteVitals">
-	<description>WordPress Coding Standards para el plugin SiteVitals.</description>
+<ruleset name="zer0sh-site-health-monitor">
+	<description>WordPress Coding Standards para el plugin zer0sh Site Health Monitor.</description>
 
 	<file>.</file>
 
