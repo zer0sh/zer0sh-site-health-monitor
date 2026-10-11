@@ -18,3 +18,12 @@ composer.lock
 /.vscode/
 *.swp
 .DS_Store
+
+# Tareas y documentacion interna de desarrollo
+todo.md
+AGENTS.md
+RUNBOOK.md
+
+# Build local y paquetes descomprimidos
+/sitevitals/
+/staging/
