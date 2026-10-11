@@ -1,12 +1,12 @@
 {
-	"name": "zer0-sh/sitevitals",
+	"name": "zer0-sh/zer0sh-site-health-monitor",
 	"description": "Ultra lightweight WordPress plugin to monitor your website's performance, health, and security.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
-			"name": "SiteVitals",
-			"homepage": "https://github.com/zer0-sh/sitevitals"
+			"name": "zer0sh",
+			"homepage": "https://github.com/zer0-sh/zer0sh-site-health-monitor"
 		}
 	],
 	"require": {
@@ -20,13 +20,13 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"SiteVitals\\Admin\\": "admin/",
-			"SiteVitals\\": "includes/"
+			"Zer0sh\\SiteHealthMonitor\\Admin\\": "admin/",
+			"Zer0sh\\SiteHealthMonitor\\": "includes/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"SiteVitals\\Tests\\": "tests/"
+			"Zer0sh\\SiteHealthMonitor\\Tests\\": "tests/"
 		}
 	},
 	"scripts": {

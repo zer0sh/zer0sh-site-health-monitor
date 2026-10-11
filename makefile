@@ -53,3 +53,15 @@ db-export: ## Export a database (Usage: make db-export FILE=backup.sql)
 clean: ## Stop containers and remove volumes/data from the local database
 	$(DC) down -v
 	@echo "Environment and volumes cleaned up completely."
+
+package: ## Build a clean ZIP package for WordPress.org submission
+	@rm -rf staging zer0sh-site-health-monitor-*.zip
+	@mkdir -p staging/zer0sh-site-health-monitor/vendor
+	@cp -a zer0sh-site-health-monitor.php readme.txt LICENSE composer.json staging/zer0sh-site-health-monitor/
+	@cp -a includes admin assets languages staging/zer0sh-site-health-monitor/
+	@cp -a vendor/autoload.php vendor/composer staging/zer0sh-site-health-monitor/vendor/
+	@rm -rf staging/zer0sh-site-health-monitor/vendor/composer/installers/.github
+	@rm -f staging/zer0sh-site-health-monitor/languages/*.mo staging/zer0sh-site-health-monitor/languages/*.po
+	@(cd staging && zip -qr ../zer0sh-site-health-monitor-0.1.3.zip zer0sh-site-health-monitor)
+	@rm -rf staging
+	@echo "Package created: zer0sh-site-health-monitor-0.1.3.zip ($$(du -h zer0sh-site-health-monitor-0.1.3.zip | cut -f1))"

@@ -11,7 +11,7 @@
 
 	<config name="minimum_supported_wp_version" value="6.5" />
 	<config name="testVersion" value="7.4-8.5" />
-	<config name="text_domain" value="sitevitals" />
+	<config name="text_domain" value="zer0sh-site-health-monitor" />
 
 	<!--
 		El proyecto usa autoload PSR-4 (composer.json): el nombre de los
@@ -28,6 +28,10 @@
 	<exclude-pattern>tests/</exclude-pattern>
 	<exclude-pattern>node_modules/</exclude-pattern>
 	<exclude-pattern>\.github/</exclude-pattern>
+	<exclude-pattern>staging/</exclude-pattern>
+	<exclude-pattern>review/</exclude-pattern>
+	<exclude-pattern>sitevitals/</exclude-pattern>
+	<exclude-pattern>zer0sh-site-health-monitor/</exclude-pattern>
 	<!--
 		wp-content/ aloja contenido local de WordPress (otros plugins)
 		montado para pruebas; no es parte del código del plugin.
